@@ -24,6 +24,11 @@
       {{summer-note height=contentHeight btnSize=bs-sm content=postContent airMode=false focus=false header="Example" disabled=editingDisabled options=options disabledOptions=disabledOptions}}
 
       <p>Disable editing {{input type="checkbox" checked=editingDisabled}}</p>
+      <div class='well'>
+        <p>Raw input, shows changes from ember to summernote</p>
+
+        {{input type='text' value=postContent}}
+      </div>
     </div>
     <div class="container">
       <div class='wysiwyg-preview'>
