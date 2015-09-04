@@ -1,10 +1,11 @@
 import Ember from "ember";
-
+import _ from 'lodash';
 
 
 var SummerNoteComponent = Ember.Component.extend({
 
   classNames: ['wysiwyg-editor'],
+  options: {},
   btnSize: 'btn-xs',
   height: 120,
   focus: false,
@@ -32,6 +33,9 @@ var SummerNoteComponent = Ember.Component.extend({
 
     Ember.assert("summernote has to exist on Ember.$.fn.summernote", typeof Ember.$.fn.summernote === "function" );
     Ember.assert("tooltip has to exist on Ember.$.fn.tooltip", typeof Ember.$.fn.tooltip === "function" );
+
+    var options = this.get('options');
+    _.defaults(options, defaultOptions);
 
     this.$('#summernote').summernote({
       height: _height,
