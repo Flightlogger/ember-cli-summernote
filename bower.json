@@ -3,7 +3,7 @@
   "dependencies": {
     "jquery": "^1.11.1",
     "ember": "1.10.0",
-    "ember-data": "1.0.0-beta.15",
+    "ember-data": "1.0.0-beta.16",
     "ember-resolver": "~0.1.12",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
@@ -14,7 +14,6 @@
     "qunit": "~1.17.1"
   },
   "devDependencies": {
-   "summernote": "~0.6.1"
+    "summernote": "~0.6.16"
   }
-
 }

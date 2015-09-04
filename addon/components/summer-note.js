@@ -1,10 +1,11 @@
 import Ember from "ember";
-
+import _ from 'lodash';
 
 
 var SummerNoteComponent = Ember.Component.extend({
 
   classNames: ['wysiwyg-editor'],
+  options: {},
   btnSize: 'btn-xs',
   height: 120,
   focus: false,
@@ -28,7 +29,9 @@ var SummerNoteComponent = Ember.Component.extend({
     Ember.assert("summernote has to exist on Ember.$.fn.summernote", typeof Ember.$.fn.summernote === "function" );
     Ember.assert("tooltip has to exist on Ember.$.fn.tooltip", typeof Ember.$.fn.tooltip === "function" );
 
-    this.$('textarea').summernote({
+    var options = this.get('options');
+
+    var defaultOptions = {
       height: _height,
       focus: _focus,
       toolbar: [
@@ -44,14 +47,23 @@ var SummerNoteComponent = Ember.Component.extend({
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']]
       ],
-      airMode: _airMode,
-      // airPopover: [
-      //   ['color', ['color']],
-      //   ['font', ['bold', 'underline', 'clear']],
-      //   ['para', ['ul', 'paragraph']],
-      //   ['table', ['table']],
-      //   ['insert', ['link', 'picture']]
-      // ]
+      airPopover: [
+        ['color', ['color']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['para', ['ul', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture']]
+      ]
+    };
+
+    if(_airMode) {
+      defaultOptions.airPopover = _airMode;
+    }
+
+    _.defaults(options, defaultOptions);
+
+    this.$('textarea').summernote(options).on('summernote.change', () => {
+      this.doUpdate();
     });
 
     this.$().find('.note-editable').attr('contenteditable', !this.get('disabled'));
@@ -60,20 +72,12 @@ var SummerNoteComponent = Ember.Component.extend({
     this.$('textarea').code(_content);
     this.$('.btn').addClass(_btnSize);
   },
-  
-  keyUp: function() {
-    this.doUpdate();
-  },
-
-  click: function() {
-    this.doUpdate();
-  },
 
   doUpdate: function() {
     var content = this.$('.note-editable').html();
     this.set('content', content);
   },
-  
+
   setHeight: function() {
     this.$().find('.note-editable').css('height', this.get('height')); //use css height, as jQuery heigth/outerHeight does add the padding+margin
   }.observes('height'),
