@@ -35,7 +35,7 @@ var SummerNoteComponent = Ember.Component.extend({
     Ember.assert("tooltip has to exist on Ember.$.fn.tooltip", typeof Ember.$.fn.tooltip === "function" );
 
     var options = this.get('options');
-    _.defaults(options, defaultOptions);
+    //_.defaults(options, defaultOptions);
 
     this.$('#summernote').summernote({
       height: _height,
