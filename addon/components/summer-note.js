@@ -62,6 +62,10 @@ var SummerNoteComponent = Ember.Component.extend({
 
     _.defaults(options, defaultOptions);
 
+    if(!!document.createRange) {
+      document.getSelection().removeAllRanges();
+    }
+
     this.$('textarea').summernote(options).on('summernote.change', () => {
       this.doUpdate();
     });
